@@ -13,6 +13,9 @@ echo "::info::Configuration"
 echo "::info:: CURRENT_BRANCH $CURRENT_BRANCH"
 echo "::info:: HEAD_BRANCH $HEAD_BRANCH"
 echo "::info:: BASE_BRANCH $BASE_BRANCH"
+echo "::info:: TITLE $TITLE"
+echo "::info:: BODY $BODY"
+
 echo "::info:: if CURRENT_BRANCH is HEAD_BRANCH and is ahead of BASE_BRANCH, this action creates PR from CURRENT_BRANCH/HEAD_BRANCH against BASE_BRANCH"
 echo "::info:: This action helps in keeping two branches in sync by auto creating PR"
 
@@ -39,7 +42,7 @@ if [ "$CURRENT_BRANCH" = "$HEAD_BRANCH" ]; then
       -H "Accept: application/vnd.github.v3+json" \
       -H "Authorization: token $GITHUB_TOKEN" \
       "$CREATE_PR_URL" \
-      -d "{\"head\":\"$CURRENT_BRANCH\",\"base\":\"$BASE_BRANCH\", \"title\": \"Merge $CURRENT_BRANCH into $BASE_BRANCH\"}"
+      -d "{\"head\":\"$CURRENT_BRANCH\",\"base\":\"$BASE_BRANCH\", \"title\": \"Merge $CURRENT_BRANCH into $BASE_BRANCH\", \"body\": \"$BODY\"}"
   )
     ERROR_MSG=$(echo "${GIT_CREATE_PR_RESPONSE}" | jq '.errors[0].message')
     check_create_PR_response "$ERROR_MSG"
