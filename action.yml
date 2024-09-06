@@ -1,5 +1,5 @@
 # action.yml
-name: 'Create PR from one branch against another branch'
+name: 'Create PR with metadta'
 description: 'Action to automatically create PR to keep two branches in sync.'
 author: 'Poorva Gokhale'
 icon: 'git-pull-request'
